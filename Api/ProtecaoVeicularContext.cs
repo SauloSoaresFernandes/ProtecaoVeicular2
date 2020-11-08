@@ -1,4 +1,5 @@
 ﻿using System;
+using Api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -15,8 +16,8 @@ namespace Api
         {
         }
 
-        public virtual DbSet<TbAssociado> TbAssociado { get; set; }
-        public virtual DbSet<TbVeiculo> TbVeiculo { get; set; }
+        public virtual DbSet<Associados> Associados { get; set; }
+        public virtual DbSet<Veiculos> Veiculos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,7 +30,7 @@ namespace Api
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TbAssociado>(entity =>
+            modelBuilder.Entity<Associados>(entity =>
             {
                 entity.ToTable("TB_Associado");
 
@@ -50,7 +51,7 @@ namespace Api
                     .IsFixedLength();
             });
 
-            modelBuilder.Entity<TbVeiculo>(entity =>
+            modelBuilder.Entity<Veiculos>(entity =>
             {
                 entity.ToTable("TB_Veiculo");
 

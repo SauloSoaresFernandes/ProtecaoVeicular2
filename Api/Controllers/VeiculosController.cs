@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Api;
+using Api.Models;
 
 namespace Api.Controllers
 {
@@ -22,37 +23,37 @@ namespace Api.Controllers
 
         // GET: api/Veiculos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TbVeiculo>>> GetTbVeiculo()
+        public async Task<ActionResult<IEnumerable<Veiculos>>> GetVeiculos()
         {
-            return await _context.TbVeiculo.ToListAsync();
+            return await _context.Veiculos.ToListAsync();
         }
 
         // GET: api/Veiculos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TbVeiculo>> GetTbVeiculo(int id)
+        public async Task<ActionResult<Veiculos>> GetVeiculos(int id)
         {
-            var tbVeiculo = await _context.TbVeiculo.FindAsync(id);
+            var Veiculos = await _context.Veiculos.FindAsync(id);
 
-            if (tbVeiculo == null)
+            if (Veiculos == null)
             {
                 return NotFound();
             }
 
-            return tbVeiculo;
+            return Veiculos;
         }
 
         // PUT: api/Veiculos/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTbVeiculo(int id, TbVeiculo tbVeiculo)
+        public async Task<IActionResult> PutVeiculos(int id, Veiculos Veiculos)
         {
-            if (id != tbVeiculo.Id)
+            if (id != Veiculos.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tbVeiculo).State = EntityState.Modified;
+            _context.Entry(Veiculos).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +61,7 @@ namespace Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TbVeiculoExists(id))
+                if (!VeiculosExists(id))
                 {
                     return NotFound();
                 }
@@ -77,33 +78,33 @@ namespace Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<TbVeiculo>> PostTbVeiculo(TbVeiculo tbVeiculo)
+        public async Task<ActionResult<Veiculos>> PostVeiculos(Veiculos Veiculos)
         {
-            _context.TbVeiculo.Add(tbVeiculo);
+            _context.Veiculos.Add(Veiculos);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTbVeiculo", new { id = tbVeiculo.Id }, tbVeiculo);
+            return CreatedAtAction("GetVeiculos", new { id = Veiculos.Id }, Veiculos);
         }
 
         // DELETE: api/Veiculos/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<TbVeiculo>> DeleteTbVeiculo(int id)
+        public async Task<ActionResult<Veiculos>> DeleteVeiculos(int id)
         {
-            var tbVeiculo = await _context.TbVeiculo.FindAsync(id);
-            if (tbVeiculo == null)
+            var Veiculos = await _context.Veiculos.FindAsync(id);
+            if (Veiculos == null)
             {
                 return NotFound();
             }
 
-            _context.TbVeiculo.Remove(tbVeiculo);
+            _context.Veiculos.Remove(Veiculos);
             await _context.SaveChangesAsync();
 
-            return tbVeiculo;
+            return Veiculos;
         }
 
-        private bool TbVeiculoExists(int id)
+        private bool VeiculosExists(int id)
         {
-            return _context.TbVeiculo.Any(e => e.Id == id);
+            return _context.Veiculos.Any(e => e.Id == id);
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Api
+namespace Api.Models
 {
-    public partial class TbAssociado
+    public class Associados
     {
         public int Id { get; set; }
         public string NomeAssociado { get; set; }

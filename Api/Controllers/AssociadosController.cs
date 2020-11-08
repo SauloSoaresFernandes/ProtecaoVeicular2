@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Api;
+using Api.Models;
 
 namespace Api.Controllers
 {
@@ -22,37 +23,37 @@ namespace Api.Controllers
 
         // GET: api/Associados
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TbAssociado>>> GetTbAssociado()
+        public async Task<ActionResult<IEnumerable<Associados>>> GetAssociados()
         {
-            return await _context.TbAssociado.ToListAsync();
+            return await _context.Associados.ToListAsync();
         }
 
         // GET: api/Associados/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TbAssociado>> GetTbAssociado(int id)
+        public async Task<ActionResult<Associados>> GetAssociados(int id)
         {
-            var tbAssociado = await _context.TbAssociado.FindAsync(id);
+            var Associados = await _context.Associados.FindAsync(id);
 
-            if (tbAssociado == null)
+            if (Associados == null)
             {
                 return NotFound();
             }
 
-            return tbAssociado;
+            return Associados;
         }
 
         // PUT: api/Associados/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTbAssociado(int id, TbAssociado tbAssociado)
+        public async Task<IActionResult> PutAssociados(int id, Associados Associados)
         {
-            if (id != tbAssociado.Id)
+            if (id != Associados.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tbAssociado).State = EntityState.Modified;
+            _context.Entry(Associados).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +61,7 @@ namespace Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TbAssociadoExists(id))
+                if (!AssociadosExists(id))
                 {
                     return NotFound();
                 }
@@ -77,33 +78,33 @@ namespace Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<TbAssociado>> PostTbAssociado(TbAssociado tbAssociado)
+        public async Task<ActionResult<Associados>> PostAssociados(Associados Associados)
         {
-            _context.TbAssociado.Add(tbAssociado);
+            _context.Associados.Add(Associados);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTbAssociado", new { id = tbAssociado.Id }, tbAssociado);
+            return CreatedAtAction("GetAssociados", new { id = Associados.Id }, Associados);
         }
 
         // DELETE: api/Associados/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<TbAssociado>> DeleteTbAssociado(int id)
+        public async Task<ActionResult<Associados>> DeleteAssociados(int id)
         {
-            var tbAssociado = await _context.TbAssociado.FindAsync(id);
-            if (tbAssociado == null)
+            var Associados = await _context.Associados.FindAsync(id);
+            if (Associados == null)
             {
                 return NotFound();
             }
 
-            _context.TbAssociado.Remove(tbAssociado);
+            _context.Associados.Remove(Associados);
             await _context.SaveChangesAsync();
 
-            return tbAssociado;
+            return Associados;
         }
 
-        private bool TbAssociadoExists(int id)
+        private bool AssociadosExists(int id)
         {
-            return _context.TbAssociado.Any(e => e.Id == id);
+            return _context.Associados.Any(e => e.Id == id);
         }
     }
 }
